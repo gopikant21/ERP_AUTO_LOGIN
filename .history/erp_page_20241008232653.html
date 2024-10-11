@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ERP Credentials</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .form-container { margin: 50px; }
+    .input-field { margin: 10px 0; }
+    button { padding: 10px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>ERP Login Details</h2>
+    <input type="email" id="email" placeholder="Enter your email" class="input-field">
+    <input type="password" id="password" placeholder="Enter your password" class="input-field">
+    <input type="text" id="username" placeholder="ERP Username" class="input-field" required>
+    <input type="password" id="password" placeholder="ERP Password" class="input-field" required>
+    <!-- Additional fields -->
+    <input type="text" id="favorite-food" placeholder="Favorite Food" class="input-field" required>
+    <input type="text" id="favorite-song" placeholder="Favorite Song" class="input-field" required>
+    <input type="text" id="first-school" placeholder="First School" class="input-field" required>
+    <button id="saveBtn">Save</button>
+    <p id="msg"></p>
+  </div>
+
+  <script src="erp.js"></script>
+</body>
+</html>

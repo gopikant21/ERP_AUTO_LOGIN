@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "ERP Auto Login Extension",
+  "version": "1.0",
+  "permissions": ["storage", "activeTab", "scripting", "tabs"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "host_permissions": ["https://erp.iitkgp.ac.in/*", "http://localhost/get"],
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://erp.iitkgp.ac.in/*"
+      ],
+      "js": ["content.js"]
+    }
+  ],
+
+  
+  "web_accessible_resources": [
+    {
+      "resources": ["form.html"],
+      "matches": ["http://localhost/*"]
+    }
+  ]
+}

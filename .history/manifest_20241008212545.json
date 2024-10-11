@@ -1,0 +1,22 @@
+{
+    "manifest_version": 3,
+    "name": "ERP Auto Login Extension",
+    "version": "1.0",
+    "permissions": ["storage", "activeTab", "scripting"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_popup": "login.html"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<your ERP login page URL>"],
+        "js": ["content.js"]
+      }
+    ],
+    "icons": {
+      "48": "icon.png"
+    }
+  }
+  
