@@ -17,7 +17,7 @@ chrome.runtime.onSuspend.addListener(function() {
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "getCredentials") {
-    fetch("http://localhost:3000/get-credentials", {
+    fetch("https://erp-auto-login.onrender.com/get-credentials", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -17,7 +17,7 @@ chrome.storage.local.set({ email: email }, function() {
   if (email && email_password && erp_username && erp_password && food && song && school) {
     try {
       // Send ERP credentials to backend API to save in the database
-      const response = await fetch("http://localhost:3000/save-credentials", {
+      const response = await fetch("https://erp-auto-login.onrender.com/save-credentials", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
