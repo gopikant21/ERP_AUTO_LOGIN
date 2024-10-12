@@ -55,6 +55,8 @@ app.post("/save-credentials", async (req, res) => {
   song = encrypt(song);
   school = encrypt(school);
 
+  console.log(food);
+
 
   try {
     // Insert ERP credentials into the 'erp_credentials' collection
