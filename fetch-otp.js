@@ -2,6 +2,42 @@ const Imap = require('imap');
 const { simpleParser } = require("mailparser");
 require("dotenv").config();
 
+const WebSocket = require('ws');
+const wss = new WebSocket.Server({ port: 8080 });
+
+wss.on('connection', ws => {
+    console.log('Client connected');
+
+    // Listen for messages from the client
+    ws.on('message', (message) => {
+        const messageStr = message.toString(); // Converts buffer to string
+        console.log('Received message as string:', messageStr);
+    
+        if (messageStr === "fetch-otp") {
+            console.log('Fetching OTP based on client request...');
+            setTimeout(async () => {
+                try {
+                    const otp = await fetchOtpFromEmail();
+                    console.log('OTP:', otp);
+                    ws.send(otp);  // Send the OTP back to the client
+                } catch (error) {
+                    console.error('Failed to fetch OTP:', error);
+                }
+            }, 5000);
+            
+            
+        }
+    });
+    
+
+    ws.on('close', () => {
+        console.log('Client disconnected');
+    });
+
+    ws.on('error', (error) => {
+        console.error('WebSocket error:', error);
+    });
+});
 
 
 function fetchOtpFromEmail() {
@@ -72,3 +108,5 @@ function fetchOtpFromEmail() {
         imap.connect();
     });
 }
+
+module.exports = fetchOtpFromEmail;

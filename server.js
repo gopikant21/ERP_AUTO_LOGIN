@@ -5,6 +5,8 @@ const { MongoClient } = require('mongodb');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 
+const fetchOtpFromEmail = require('./fetch-otp'); 
+
 /*const https = require('https');
 const fs = require('fs');*/
 
@@ -92,10 +94,25 @@ app.post('/get-credentials', async (req, res) => {
 });
   
 
-// Start HTTPS server
-/*https.createServer(options, app).listen(3000, () => {
-  console.log('HTTPS Server running on port 3000');
+// Route to get OTP from email
+/*app.post('/get-otp', async (req, res) => {
+  try {
+      // Call the function that fetches OTP from the email
+      const otp = await fetchOtpFromEmail();
+      
+      if (otp) {
+          res.status(200).json({ otp });
+      } else {
+          res.status(404).json({ error: 'OTP not found' });
+      }
+  } catch (error) {
+      console.error('Error fetching OTP:', error);
+      res.status(500).json({ error: 'Failed to fetch OTP from email' });
+  }
 });*/
+
+
+
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

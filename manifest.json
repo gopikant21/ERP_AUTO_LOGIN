@@ -6,7 +6,7 @@
   "background": {
     "service_worker": "background.js"
   },
-  "host_permissions": ["https://erp.iitkgp.ac.in/*", "http://localhost/get-credentials"],
+  "host_permissions": ["https://erp.iitkgp.ac.in/*", "https://erp-auto-login.onrender.com/get-credentials"],
 
   "content_scripts": [
     {

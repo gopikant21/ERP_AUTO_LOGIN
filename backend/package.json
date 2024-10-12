@@ -18,7 +18,8 @@
     "imap": "^0.8.19",
     "mailparser": "^3.7.1",
     "mongodb": "^6.9.0",
-    "openssl": "^2.0.0"
+    "openssl": "^2.0.0",
+    "ws": "^8.18.0"
   },
   "devDependencies": {
     "@types/imap": "^0.8.40",
