@@ -117,22 +117,6 @@ app.post("/get-credentials", async (req, res) => {
   }
 });
 
-// Route to get OTP from email
-/*app.post('/get-otp', async (req, res) => {
-  try {
-      // Call the function that fetches OTP from the email
-      const otp = await fetchOtpFromEmail();
-      
-      if (otp) {
-          res.status(200).json({ otp });
-      } else {
-          res.status(404).json({ error: 'OTP not found' });
-      }
-  } catch (error) {
-      console.error('Error fetching OTP:', error);
-      res.status(500).json({ error: 'Failed to fetch OTP from email' });
-  }
-});*/
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
