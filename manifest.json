@@ -6,7 +6,11 @@
   "background": {
     "service_worker": "background.js"
   },
-  "host_permissions": ["https://erp.iitkgp.ac.in/*", "http://localhost/get-credentials"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "ERP Autofill"
+  },
+  "host_permissions": ["https://erp.iitkgp.ac.in/*", "https://erp-auto-login.onrender.com/get-credentials"],
 
   "content_scripts": [
     {
