@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const { MongoClient } = require("mongodb");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
+const crypto = require('crypto');
 
 const corsOptions = {
   origin: "*", // Allow all origins, but you might want to restrict this in production
@@ -44,6 +45,16 @@ app.post("/save-credentials", async (req, res) => {
     song,
     school,
   } = req.body;
+
+
+  email = encrypt(email);
+  email_password = encrypt(email_password);
+  erp_username = encrypt(erp_username);
+  erp_password = encrypt(erp_password);
+  food = encrypt(food);
+  song = encrypt(song);
+  school = encrypt(school);
+
 
   try {
     // Insert ERP credentials into the 'erp_credentials' collection
