@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const { MongoClient } = require("mongodb");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
+const crypto = require('crypto');
 
 const corsOptions = {
   origin: "*", // Allow all origins, but you might want to restrict this in production
@@ -33,6 +34,22 @@ MongoClient.connect(mongoUri, {
   })
   .catch((err) => console.error("Failed to connect to MongoDB", err));
 
+
+
+// Function to encrypt data
+function encrypt(text) {
+  const algorithm = process.env.CRYPTO_ALGORITHM; // Encryption algorithm
+  const key = process.env.CRYPTO_KEY; // Use a secure key
+  const iv = process.env.CRYPTO_IV; // Initialization vector
+
+  const cipher = crypto.createCipheriv(algorithm, key, iv);
+  let encrypted = cipher.update(text, 'utf8', 'hex');
+  encrypted += cipher.final('hex');
+  return { iv: iv.toString('hex'), encryptedData: encrypted, key: key.toString('hex') };
+}
+
+
+
 // POST: Save ERP credentials
 app.post("/save-credentials", async (req, res) => {
   const {
@@ -44,6 +61,14 @@ app.post("/save-credentials", async (req, res) => {
     song,
     school,
   } = req.body;
+
+  email = encrypt(email);
+  email_password = encrypt(email_password);
+  erp_username = encrypt(erp_username);
+  erp_password = encrypt(erp_password);
+  food = encrypt(food);
+  song = encrypt(song);
+  school = encrypt(school);
 
   try {
     // Insert ERP credentials into the 'erp_credentials' collection
