@@ -1,16 +1,6 @@
-/*chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.action === 'activate') {
-      // Functionality you want to execute when the button is clicked
-      console.log('Content script activated!');
-      // Add your specific functionality here
-      auto_fill();
-      //alert('Content script has been activated!');
-  }
-});*/
-
 console.log("in content.js");
 
-let email = "gopikant";
+let email = "test@gmail.com";
 
 chrome.storage.local.get(["email"], function (result) {
   if (result.email) {
@@ -25,8 +15,20 @@ chrome.storage.local.get(["email"], function (result) {
         if (response.credentials) {
           console.log("Credentials received:", response.credentials);
           const credentials = response.credentials;
-          auto_fill(credentials);
-          // Use the credentials here
+
+
+          // Add a message listener to trigger autofill when the button is clicked
+          chrome.runtime.onMessage.addListener(function (request, sender, sendResponse){
+            console.log("checking startAutofill message recieved or not!!")
+            if (request.action === "startAutofill"){
+              console.log("Starting autofill process...");
+              auto_fill(credentials);
+            }else{
+              alert("start autofill button is not clicked!!");
+            }
+          })
+    
+
         } else {
           console.log("content.js: No credentials found");
           console.error("Error:", response.error);
@@ -83,6 +85,9 @@ function auto_fill(credentials) {
           ans.value = credentials.food;
         }
 
+        // Stop observing once the question has been handled
+        observer.disconnect();
+         
         // Programmatically click the "Get OTP" button
         if (ans.value) {
           document.getElementById("getotp").click();
@@ -117,14 +122,16 @@ function auto_fill(credentials) {
           };
         }
 
-        // Stop observing once the question has been handled
-        observer.disconnect();
+        
+      }else{
+        console.log("question element not found!!");
       }
     });
   });
 
   // Start observing the target node (the document body) for configured mutations
   observer.observe(document.body, { childList: true, subtree: true });
+ 
 }
 
 /*Optionally, handle the OTP input using an API or similar logic
