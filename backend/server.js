@@ -48,7 +48,7 @@ function encrypt(text) {
 
 // POST: Save ERP credentials
 app.post("/save-credentials", async (req, res) => {
-  const {
+  let {
     email,
     email_password,
     erp_username,
