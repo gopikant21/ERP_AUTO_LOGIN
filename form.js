@@ -10,48 +10,8 @@ document.getElementById("saveBtn").addEventListener("click", async function () {
 
 
 
-
-// Perform encryption using AES-GCM
-async function encryptData(text, key) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(text);
-
-  // Generate a random IV
-  const iv = window.crypto.getRandomValues(new Uint8Array(12));
-
-  // Perform encryption using AES-GCM
-  const encrypted = await window.crypto.subtle.encrypt(
-    {
-      name: "AES-GCM",
-      iv: iv,
-    },
-    key, // The encryption key
-    data // The data to encrypt
-  );
-
-  return {
-    iv: Array.from(iv), // Return IV for later use in decryption
-    encrypted: Array.from(new Uint8Array(encrypted)), // Return encrypted data
-  };
-}
-
-// Example usage:
-const password = "qwerty@123";
-const passwordKey = await window.crypto.subtle.importKey(
-  "raw",
-  new TextEncoder().encode(password),
-  { name: "AES-GCM" },
-  false,
-  ["encrypt", "decrypt"]
-);
-
-const encryptedEmail = await encryptData(email, passwordKey);
-console.log("Encrypted Data:", encryptedEmail);
-console.log(email);
-
 // Store email in Chrome storage
 chrome.storage.local.set({ email: email }, function() {
-  console.log('encryptedEmail saved:', encryptedEmail);
   console.log('Email saved:', email);
 });
 
