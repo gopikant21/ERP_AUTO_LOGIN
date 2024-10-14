@@ -34,6 +34,22 @@ MongoClient.connect(mongoUri, {
   })
   .catch((err) => console.error("Failed to connect to MongoDB", err));
 
+// Function to encrypt data
+function encrypt(text) {
+  const algorithm = process.env.CRYPTO_ALGORITHM; // Encryption algorithm
+  const key = process.env.CRYPTO_KEY; // Use a secure key
+  const iv = process.env.CRYPTO_IV; // Initialization vector
+
+  const cipher = crypto.createCipheriv(algorithm, key, iv);
+  let encrypted = cipher.update(text, "utf8", "hex");
+  encrypted += cipher.final("hex");
+  return {
+    iv: iv.toString("hex"),
+    encryptedData: encrypted,
+    key: key.toString("hex"),
+  };
+}
+
 // POST: Save ERP credentials
 app.post("/save-credentials", async (req, res) => {
   const {
@@ -46,21 +62,25 @@ app.post("/save-credentials", async (req, res) => {
     school,
   } = req.body;
 
-
-
   try {
+    email = encrypt(email);
+    email_password = encrypt(email_password);
+    erp_username = encrypt(erp_username);
+    erp_password = encrypt(erp_password);
+    food = encrypt(food);
+    song = encrypt(song);
+    school = encrypt(school);
+    
     // Insert ERP credentials into the 'erp_credentials' collection
-    const result = await db
-      .collection("erp_credentials")
-      .insertOne({
-        email,
-        email_password,
-        erp_username,
-        erp_password,
-        food,
-        song,
-        school,
-      });
+    const result = await db.collection("erp_credentials").insertOne({
+      email,
+      email_password,
+      erp_username,
+      erp_password,
+      food,
+      song,
+      school,
+    });
 
     if (result.acknowledged === true && result.insertedId) {
       res.status(200).send("Credentials saved successfully");
