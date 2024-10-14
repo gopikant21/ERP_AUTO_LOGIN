@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const { MongoClient } = require("mongodb");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
-///const crypto = require('crypto');
+const crypto = require('crypto');
 
 const corsOptions = {
   origin: "*", // Allow all origins, but you might want to restrict this in production
