@@ -62,15 +62,16 @@ app.post("/save-credentials", async (req, res) => {
     school,
   } = req.body;
 
-  email = encrypt(email);
+  
+
+  try {
+    email = encrypt(email);
   email_password = encrypt(email_password);
   erp_username = encrypt(erp_username);
   erp_password = encrypt(erp_password);
   food = encrypt(food);
   song = encrypt(song);
   school = encrypt(school);
-
-  try {
     // Insert ERP credentials into the 'erp_credentials' collection
     const result = await db
       .collection("erp_credentials")
