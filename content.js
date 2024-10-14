@@ -61,6 +61,8 @@ chrome.storage.local.get(["email"], function (result) {
   }
 }*/
 
+
+// This function will autofill the form with the ERP credentials
 function auto_fill(credentials) {
   // Example usage: auto-filling a login form with ERP credentials
   document.getElementById("user_id").value = credentials.erp_username;
