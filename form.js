@@ -1,11 +1,13 @@
 document.getElementById("saveBtn").addEventListener("click", async function () {
-  const email = document.getElementById("email").value;
-  const email_password = document.getElementById("email-password").value;
-  const erp_username = document.getElementById("erp-username").value;
-  const erp_password = document.getElementById("erp-password").value;
-  const food = document.getElementById("favorite-food").value;
-  const song = document.getElementById("favorite-song").value;
-  const school = document.getElementById("first-school").value;
+  let email = document.getElementById("email").value;
+  let email_password = document.getElementById("email-password").value;
+  let erp_username = document.getElementById("erp-username").value;
+  let erp_password = document.getElementById("erp-password").value;
+  let food = document.getElementById("favorite-food").value;
+  let song = document.getElementById("favorite-song").value;
+  let school = document.getElementById("first-school").value;
+
+
 
 
 // Store email in Chrome storage
