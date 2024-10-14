@@ -43,11 +43,7 @@ function encrypt(text) {
   const cipher = crypto.createCipheriv(algorithm, key, iv);
   let encrypted = cipher.update(text, "utf8", "hex");
   encrypted += cipher.final("hex");
-  return {
-    iv: iv.toString("hex"),
-    encryptedData: encrypted,
-    key: key.toString("hex"),
-  };
+  return iv.toString('hex') + ':' + encrypted; // Store IV with the encrypted data
 }
 
 // POST: Save ERP credentials
@@ -70,7 +66,7 @@ app.post("/save-credentials", async (req, res) => {
     food = encrypt(food);
     song = encrypt(song);
     school = encrypt(school);
-    
+
     // Insert ERP credentials into the 'erp_credentials' collection
     const result = await db.collection("erp_credentials").insertOne({
       email,
