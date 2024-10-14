@@ -40,7 +40,7 @@ function encrypt(text) {
   const key = process.env.CRYPTO_KEY; // Use a secure key
   const iv = process.env.CRYPTO_IV; // Initialization vector
 
-  const cipher = crypto.createCipheriv(algorithm, key, iv);
+  const cipher = crypto.createCipheriv(algorithm, Buffer.from(key), iv);
   let encrypted = cipher.update(text, "utf8", "hex");
   encrypted += cipher.final("hex");
   return iv.toString('hex') + ':' + encrypted; // Store IV with the encrypted data
