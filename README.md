@@ -4,6 +4,11 @@ This project automates the login process for the **ERP Portal of IIT Kharagpur**
 
 **Note:** This project is intended to work locally on your machine and is not deployed online. You can follow the instructions below to set it up and use it.
 
+## Demo
+
+![Auto-Login Demo](path/to/your/demo.gif)
+
+
 ## Features
 - Automatically fetches OTP from your Gmail inbox.
 - Automatically fills out the ERP login form with your username, password, random security question and OTP.
