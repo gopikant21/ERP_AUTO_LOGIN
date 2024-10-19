@@ -6,7 +6,7 @@ This project automates the login process for the **ERP Portal of IIT Kharagpur**
 
 ## Demo
 
-![Auto-Login Demo](path/to/your/demo.gif)
+![Auto-Login Demo](./erpautofillrecording.gif)
 
 
 ## Features
