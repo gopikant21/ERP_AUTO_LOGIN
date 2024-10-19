@@ -25,14 +25,12 @@ To run this project, you will need the following:
 First, clone this repository to your local machine:
 ```bash
 git clone https://github.com/your-username/erp-auto-login.git
-git checkout version-2
-cd erp-auto-login
+cd gmail-api
 ```
 
 ### 2. Install Dependencies
 Install the required Node.js dependencies:
 ```bash
-cd gmail-api
 npm install
 ```
 
